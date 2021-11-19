@@ -39,3 +39,4 @@ import <- function(SerialNumber) {
             'toc' = starts_with('TOCeq'),
             'doc' = starts_with('DOCeq'))
   return (spec_tidy)}
+
