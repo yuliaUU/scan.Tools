@@ -20,6 +20,6 @@ given the serial number of the spectroylyzer you want to import.Ensure the data 
 the Raw_data folder
 }
 \examples{
-scan.Tools::import("09210014")
+import("09210014")
 
 }

@@ -11,7 +11,7 @@
 #'
 #' @return A tibble of 6 columns with length equal the number of measurement the spectrolyzer performed
 #'
-#' @examples scan.Tools::import("09210014")
+#' @examples import("09210014")
 #'
 #' @export
 
