@@ -2,7 +2,7 @@
 
 <p align="center"> An R Package that improves workflow with using s::can spectrolyzer's default analyte output data format </p>
 
-## Description
+## 📙Description
 
 Following the guidance from STAT545 (UBC 2021W), this project will create functions into a package that can improve the workflow with using [S::Can spectro::lyser UV V2](https://www.s-can.at/products/spectrometer-probes) output datasets. 
 
