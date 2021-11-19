@@ -4,11 +4,16 @@
 \alias{import}
 \title{s::can spectrolyzer output dataset import and processing}
 \usage{
-import(SerialNumber)
+import(path, serialnumber)
 }
 \arguments{
-\item{SerialNumber}{Provide the serial number of the spectrolyzer wrapped in "".
-This name is chosen because the default  output data file is name after the serial number of the spectroylyzer.}
+\item{path}{Provide the path to the ".par" dataset to be imported, wrapped in "".
+If your dataset is still in ".fp" format, you need to visualize the fingerprint
+through the Analyte software to be converted to ".par" format which is the parameter
+file}
+
+\item{serialnumber}{Provide the serial number of the spectrolyzer wrapped in "". This will be used to generate
+a new column, named SN, populated with the provided serial number to follow the dataset}
 }
 \value{
 A tibble of 6 columns with length equal the number of measurement the spectrolyzer performed
@@ -20,6 +25,6 @@ given the serial number of the spectroylyzer you want to import.Ensure the data 
 the Raw_data folder
 }
 \examples{
-import("09210014")
+import("/Desktop/Raw_data/09210160.par")
 
 }

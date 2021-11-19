@@ -5,35 +5,34 @@
 #' given the serial number of the spectroylyzer you want to import.Ensure the data file ".par" is present in
 #' the Raw_data folder
 #'
-#' @param SerialNumber
-#' Provide the serial number of the spectrolyzer wrapped in "".
-#' This name is chosen because the default  output data file is name after the serial number of the spectroylyzer.
+#' @param path
+#' Provide the path to the ".par" dataset to be imported, wrapped in "".
+#' If your dataset is still in ".fp" format, you need to visualize the fingerprint
+#' through the Analyte software to be converted to ".par" format which is the parameter
+#' file
+#'
+#' @param serialnumber
+#' Provide the serial number of the spectrolyzer wrapped in "". This will be used to generate
+#' a new column, named SN, populated with the provided serial number to follow the dataset
 #'
 #' @return A tibble of 6 columns with length equal the number of measurement the spectrolyzer performed
 #'
-#' @examples import("09210014")
+#' @examples import("/Desktop/Raw_data/09210160.par")
 #'
 #' @export
 
-import <- function(SerialNumber) {
+import <- function(path, serialnumber) {
   # Import required packages
   library(tidyverse) # for working with data-time objects
   library(lubridate) # for working with data-time objects
   library(here)      # for importing via relative path
 
-  if (!nchar(SerialNumber) == 8){
-    stop ("Expected serial number string length of 8. Your serial number input has the string length of ", nchar(SerialNumber))}
-
-  if (file.exists(here::here("Raw_data")) == TRUE) {
-    x <- read_delim(here("Raw_data", paste(SerialNumber, ".par", sep="")),show_col_types = FALSE)} else {
-      stop("Raw_data folder is not presend in current project directory.
-           Please ensure folder is present with data file named after the serial
-           number")}
+    x <- read_delim(path,show_col_types = FALSE)
 
   spec_tidy <- x  %>%
     #follows sensor's default output format ordering and neglect system operation parameters
     select (1,3,5,7,9)  %>%
-    mutate (SN = SerialNumber, date = ymd_hms(`Date/Time`), 'Date/Time' = NULL)  %>%
+    mutate (SN = serialnumber, date = ymd_hms(`Date/Time`), 'Date/Time' = NULL)  %>%
     rename ('turbidity' = starts_with('Turbid.'),
             'nitrate' = starts_with('NO3-Neq'),
             'toc' = starts_with('TOCeq'),
